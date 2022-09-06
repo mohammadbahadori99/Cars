@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <bytecodeTargetLevel target="1.7">
+      <module name="Cars" target="11" />
+      <module name="Cars.app" target="11" />
+      <module name="Cars.data" target="11" />
+      <module name="Cars.domain" target="1.8" />
+      <module name="Cars.domain.main" target="1.8" />
+      <module name="Cars.domain.test" target="1.8" />
+      <module name="Cars.main" target="11" />
+      <module name="Cars.test" target="11" />
+      <module name="Cars.ui-imageList" target="11" />
+      <module name="Image_Loader" target="11" />
+      <module name="Image_Loader.app" target="11" />
+      <module name="Image_Loader.data" target="11" />
+      <module name="Image_Loader.main" target="11" />
+      <module name="Image_Loader.test" target="11" />
+      <module name="Image_Loader.ui-imageList" target="11" />
+      <module name="Taxi_Map" target="11" />
+      <module name="Taxi_Map.app" target="11" />
+      <module name="Taxi_Map.data" target="11" />
+      <module name="Taxi_Map.domain" target="1.8" />
+      <module name="Taxi_Map.domain.main" target="1.8" />
+      <module name="Taxi_Map.domain.test" target="1.8" />
+      <module name="Taxi_Map.main" target="11" />
+      <module name="Taxi_Map.test" target="11" />
+      <module name="Taxi_Map.ui-imageList" target="11" />
+    </bytecodeTargetLevel>
+  </component>
+</project>
