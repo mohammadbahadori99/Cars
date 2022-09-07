@@ -1,7 +1,7 @@
 # Android Clean MVVM architecture
 
 
-The app is built in a multi-module structure and attempts to use the latest tools and libraries. In
+The solution is built in a multi-module structure and attempts to use the latest tools and libraries. In
 a summary:
 
 * Entirely written in Kotlin.
@@ -31,5 +31,5 @@ discrete pieces of business logic off the UI thread.
 
 ## Sum up
 
-For the purpose of providing an overview of this application, I have only included general information in
+For the purpose of providing an overview of my solution, I have only included general information in
 this document
