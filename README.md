@@ -10,7 +10,6 @@ a summary:
 * Uses Kotlin Coroutines throughout threading.
 * Uses Hilt for dependency injection
 * Uses Material design Library
-* Uses Open street map
 
 ### The basic flow looks like this :
 
@@ -28,6 +27,17 @@ available, use the offline data.
 
 A lightweight domain layer sits between the data layer and the presentation layer and handles
 discrete pieces of business logic off the UI thread.
+### Technologies which i used in this project:
+* Retrofit
+* Glide
+* Room
+* Navigation Component
+* Kotlin Coroutines
+* Kotlin Flow
+* Open Street Map
+* ViewModel
+* Hilt
+* MVVM
 
 ## Sum up
 
