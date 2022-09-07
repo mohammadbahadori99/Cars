@@ -1,6 +1,8 @@
 package com.example.data.repositry
 
 import com.example.base.MyResponse
+import com.example.data.LocalDataSource
+import com.example.data.RemoteDataSource
 import com.example.data.model.MyResponseDTO
 import com.example.data.model.toCarDomainModel
 import com.example.domain.model.CarDomainModel
@@ -11,8 +13,8 @@ import kotlinx.coroutines.flow.flowOf
 import javax.inject.Inject
 
 class CarRepositoryImpl @Inject constructor(
-    private val localDataSource: com.example.data.LocalDataSource,
-    private val remoteDataSource: com.example.data.RemoteDataSource
+    private val localDataSource: LocalDataSource,
+    private val remoteDataSource: RemoteDataSource
 ) : CarRepository {
     override suspend fun fetchCars(): Flow<MyResponse<List<CarDomainModel>>> {
         val emptyResponse = emptyFlow<MyResponse<List<CarDomainModel>>>()
@@ -30,7 +32,9 @@ class CarRepositoryImpl @Inject constructor(
                 localDataSource.insertAllCars(remoteData.data)
                 flowOf(
                     MyResponse.Success(
-                        data = localDataSource.getAllCars().toCarDomainModel()))
+                        data = localDataSource.getAllCars().toCarDomainModel()
+                    )
+                )
             }
             is MyResponse.Error -> {
                 flowOf(MyResponse.Error(remoteData.error))
