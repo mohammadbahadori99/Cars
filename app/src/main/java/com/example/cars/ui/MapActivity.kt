@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.cars.R
 import com.example.cars.databinding.ActivityMapBinding
 import com.example.cars.model.CarView
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_map.*
 import org.osmdroid.api.IMapController
@@ -20,7 +21,7 @@ import org.osmdroid.views.overlay.Marker
 
 
 @AndroidEntryPoint
-class MapActivity : AppCompatActivity(), CarListCallBack {
+class MapActivity : AppCompatActivity(), CarListCallBack, DialogDismissCallback {
     private lateinit var binding: ActivityMapBinding
     private lateinit var mapController: IMapController
     private val vm: CarsViewModel by viewModels()
@@ -39,7 +40,7 @@ class MapActivity : AppCompatActivity(), CarListCallBack {
 
     private fun setupClickListener() {
         btn_showList_activityNeshanMaps.setOnClickListener {
-            val bottomSheet = CarsListBottomSheet(this)
+            val bottomSheet = CarsListBottomSheet(this,this)
             bottomSheet.show(supportFragmentManager, CarsListBottomSheet.TAG)
         }
     }
@@ -59,6 +60,11 @@ class MapActivity : AppCompatActivity(), CarListCallBack {
                     addMarkers(car)
                 }
                 mapController.setCenter(GeoPoint(it[0].latitude, it[0].longitude))
+            }
+        }
+        vm.error.observe(this) {
+            showSnackbar(it.error) {
+                vm.getAllCars()
             }
         }
     }
@@ -94,12 +100,32 @@ class MapActivity : AppCompatActivity(), CarListCallBack {
     }
 
     override fun onCarClicked(carView: CarView) {
-        val selectedMarker = (mapView.overlays.find { (it as Marker).id == carView.id } as Marker)
+        val selectedMarker =
+            (mapView.overlays.find { (it as Marker).id == carView.id } as Marker)
         selectedMarker.showInfoWindow()
         mapController.animateTo(GeoPoint(carView.latitude, carView.longitude), 17.0, 1500)
+    }
+
+    override fun onError(exception: Exception) {
+        showSnackbar(exception) { vm.getAllCars() }
+    }
+
+    private fun showSnackbar(exception: Exception, block: () -> Unit) {
+        var message = exception.message
+        if (message.isNullOrEmpty()) {
+            message = "Something went wrong!"
+        }
+        Snackbar.make(binding.root, message, Snackbar.LENGTH_INDEFINITE)
+            .setAction("Retry") {
+                block()
+            }.show()
     }
 }
 
 interface CarListCallBack {
     fun onCarClicked(carView: CarView)
+}
+
+interface DialogDismissCallback {
+    fun onError(exception: Exception)
 }

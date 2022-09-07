@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CompilerConfiguration">
-    <bytecodeTargetLevel target="1.7">
+    <bytecodeTargetLevel target="1.8">
       <module name="Cars" target="11" />
       <module name="Cars.app" target="11" />
-      <module name="Cars.data" target="11" />
-      <module name="Cars.domain" target="1.8" />
-      <module name="Cars.domain.main" target="1.8" />
-      <module name="Cars.domain.test" target="1.8" />
+      <module name="Cars.data-android" target="11" />
       <module name="Cars.main" target="11" />
       <module name="Cars.test" target="11" />
       <module name="Cars.ui-imageList" target="11" />

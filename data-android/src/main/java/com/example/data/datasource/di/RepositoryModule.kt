@@ -1,6 +1,6 @@
 package com.example.data.datasource.di
 
-import com.example.data.datasource.repositry.CarRepositoryImpl
+import com.example.data.repositry.CarRepositoryImpl
 import com.example.domain.repository.CarRepository
 import dagger.Binds
 import dagger.Module

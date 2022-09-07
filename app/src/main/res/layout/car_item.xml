@@ -7,8 +7,8 @@
 
     <ImageView
         android:id="@+id/iv_carPreview"
-        android:layout_width="72dp"
-        android:layout_height="72dp"
+        android:layout_width="@dimen/car_image_size"
+        android:layout_height="@dimen/car_image_size"
         android:src="@color/black"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -20,7 +20,7 @@
         app:layout_constraintVertical_chainStyle="packed"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toTopOf="@+id/tv_licensePlate_title"
-        android:layout_marginHorizontal="8dp"
+        android:layout_marginHorizontal="@dimen/margin_2x"
         android:text="@string/label_name"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@id/iv_carPreview"
@@ -33,7 +33,7 @@
         android:layout_width="wrap_content"
         android:textStyle="bold"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="8dp"
+        android:layout_marginHorizontal="@dimen/margin_2x"
         app:layout_constraintBottom_toBottomOf="@+id/tv_name_title"
         app:layout_constraintStart_toEndOf="@id/tv_name_title"
         app:layout_constraintTop_toTopOf="@+id/tv_name_title" />
@@ -42,7 +42,7 @@
         android:id="@+id/tv_licensePlate_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="8dp"
+        android:layout_marginHorizontal="@dimen/margin_2x"
         android:text="@string/label_license_plate"
         app:layout_constraintBottom_toBottomOf="@+id/iv_carPreview"
         app:layout_constraintStart_toEndOf="@id/iv_carPreview"
@@ -52,7 +52,7 @@
         android:id="@+id/tv_licensePlate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="8dp"
+        android:layout_marginHorizontal="@dimen/margin_2x"
         app:layout_constraintBottom_toBottomOf="@+id/tv_licensePlate_title"
         app:layout_constraintStart_toEndOf="@id/tv_licensePlate_title"
         app:layout_constraintTop_toTopOf="@+id/tv_licensePlate_title" />

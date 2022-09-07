@@ -10,23 +10,24 @@
         android:id="@+id/pb_waiting_activityNeshanMaps"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="visible"
-        android:translationZ="40dp"
+        android:translationZ="@dimen/custom_translation_z"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
     <androidx.appcompat.widget.AppCompatButton
-        android:layout_width="match_parent"
-        android:textColor="@color/white"
-        android:backgroundTint="@color/secondaryColor"
         android:id="@+id/btn_showList_activityNeshanMaps"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_margin="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_3x"
+        android:backgroundTint="@color/secondaryColor"
         android:text="@string/label_show_cars_list"
-        android:layout_height="wrap_content" />
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <org.osmdroid.views.MapView
         android:id="@+id/mapView"

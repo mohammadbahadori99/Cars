@@ -4,31 +4,33 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DividerItemDecoration
-import com.example.cars.R
+import com.example.cars.databinding.BottomSheetCarListBinding
 import com.example.cars.model.CarView
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.bottom_sheet_car_list.*
-import kotlinx.android.synthetic.main.bottom_sheet_car_list.view.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class CarsListBottomSheet(private val carListCallBack: CarListCallBack): BottomSheetDialogFragment() {
+class CarsListBottomSheet(
+    private val carListCallBack: CarListCallBack,
+    private val dialogDismissCallback: DialogDismissCallback
+) :
+    BottomSheetDialogFragment() {
     private val vm: CarsViewModel by viewModels()
+    private lateinit var binding: BottomSheetCarListBinding
     private lateinit var carsListAdapter: CarsListAdapter
-    lateinit var myView :View
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        myView = inflater.inflate(R.layout.bottom_sheet_car_list, container, false)
-        return myView
+        binding = BottomSheetCarListBinding.inflate(layoutInflater)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -39,8 +41,8 @@ class CarsListBottomSheet(private val carListCallBack: CarListCallBack): BottomS
 
     private fun setupRecyclerView() {
         carsListAdapter = CarsListAdapter { adapterOnClick(it) }
-        myView.rv_cars.adapter = carsListAdapter
-        myView.rv_cars.addItemDecoration(
+        rv_cars.adapter = carsListAdapter
+        rv_cars.addItemDecoration(
             DividerItemDecoration(
                 requireContext(),
                 DividerItemDecoration.VERTICAL
@@ -55,21 +57,22 @@ class CarsListBottomSheet(private val carListCallBack: CarListCallBack): BottomS
 
 
     private fun showList() {
-        lifecycleScope.launch(Dispatchers.Main){
+        lifecycleScope.launch(Dispatchers.Main) {
             vm.myList.observe(this@CarsListBottomSheet) {
                 carsListAdapter.submitList(it)
             }
+
             vm.showLoading.observe(this@CarsListBottomSheet) {
-                if (it) {
-                    pb_waiting.visibility = View.VISIBLE
+                pb_waiting.visibility = if (it) {
+                    View.VISIBLE
                 } else {
-                    pb_waiting.visibility = View.INVISIBLE
+                    View.INVISIBLE
                 }
             }
-            vm.error.collect {
-                val message = it.error.message
-                if (message?.isNotBlank() == true) {
-                    Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+            vm.error.observe(viewLifecycleOwner) {
+                it?.let {
+                    this@CarsListBottomSheet.dismiss()
+                    dialogDismissCallback.onError(it.error)
                 }
             }
         }

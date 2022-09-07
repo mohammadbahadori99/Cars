@@ -1,4 +1,4 @@
-package com.example.data.datasource.model
+package com.example.data.model
 
 import com.example.domain.model.CarDomainModel
 

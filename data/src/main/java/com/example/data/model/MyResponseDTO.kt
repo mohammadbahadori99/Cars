@@ -1,19 +1,13 @@
-package com.example.data.datasource.model
-
-import androidx.room.Entity
-import androidx.room.PrimaryKey
-import kotlinx.serialization.Serializable
+package com.example.data.model
 
 
-@Entity(tableName = "cars")
-@Serializable
+
 data class MyResponseDTO(
     val carImageUrl: String,
     val color: String,
     val fuelLevel: Double,
     val fuelType: String,
     val group: String,
-    @PrimaryKey
     val id: String,
     val innerCleanliness: String,
     val latitude: Double,

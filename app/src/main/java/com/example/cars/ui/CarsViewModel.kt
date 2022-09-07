@@ -10,9 +10,6 @@ import com.example.cars.model.toCarView
 import com.example.domain.usecase.FetchCarsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.emptyFlow
-import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -28,14 +25,14 @@ class CarsViewModel @Inject constructor(
     private var _showLoading = MutableLiveData(false)
     val showLoading: MutableLiveData<Boolean> get() = _showLoading
 
-    private var _error: Flow<MyResponse.Error> = emptyFlow()
-    val error: Flow<MyResponse.Error> get() = _error
+    private var _error: MutableLiveData<MyResponse.Error> = MutableLiveData()
+    val error: LiveData<MyResponse.Error> get() = _error
 
     init {
         getAllCars()
     }
 
-    private fun getAllCars() {
+    fun getAllCars() {
         viewModelScope.launch(Dispatchers.IO) {
             _showLoading.postValue(true)
             val carList = fetchCarsUseCase.invoke()
@@ -47,7 +44,7 @@ class CarsViewModel @Inject constructor(
                     }
                     is MyResponse.Error -> {
                         _showLoading.postValue(false)
-                        _error = flowOf(MyResponse.Error(myResponse.error))
+                        _error.postValue(MyResponse.Error(myResponse.error))
                     }
                     else -> {
                     }
